@@ -1,41 +1,23 @@
 import streamlit as st
 
-# Set page configuration
-st.set_page_config(page_title="Calculator App", page_icon="🧮", layout="centered")
+st.set_page_config(page_title="Calculator App", page_icon="🧮")
 
-# App title
 st.title("🧮 Simple Calculator")
-st.markdown("Perform basic arithmetic operations easily!")
+st.markdown("Perform basic arithmetic operations!")
 
-# Input fields
-num1 = st.number_input("Enter first number:", value=0.0, step=1.0)
-num2 = st.number_input("Enter second number:", value=0.0, step=1.0)
+num1 = st.number_input("Enter first number:", value=0.0)
+num2 = st.number_input("Enter second number:", value=0.0)
+operation = st.selectbox("Select operation:", ["Add", "Subtract", "Multiply", "Divide"])
 
-# Operation selection
-operation = st.selectbox(
-    "Choose an operation:",
-    ("Addition (+)", "Subtraction (-)", "Multiplication (×)", "Division (÷)")
-)
-
-# Perform calculation
-result = None
 if st.button("Calculate"):
-    if operation == "Addition (+)":
-        result = num1 + num2
-    elif operation == "Subtraction (-)":
-        result = num1 - num2
-    elif operation == "Multiplication (×)":
-        result = num1 * num2
-    elif operation == "Division (÷)":
+    if operation == "Add":
+        st.success(f"Result: {num1 + num2}")
+    elif operation == "Subtract":
+        st.success(f"Result: {num1 - num2}")
+    elif operation == "Multiply":
+        st.success(f"Result: {num1 * num2}")
+    elif operation == "Divide":
         if num2 != 0:
-            result = num1 / num2
+            st.success(f"Result: {num1 / num2}")
         else:
-            st.error("Error: Division by zero is not allowed.")
-
-# Display result
-if result is not None:
-    st.success(f"Result: **{result}**")
-
-# Footer
-st.markdown("---")
-st.caption("Made with ❤️ using Streamlit")
+            st.error("Cannot divide by zero!")
